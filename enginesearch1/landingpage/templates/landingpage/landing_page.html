@@ -1,0 +1,74 @@
+{% load staticfiles %}
+<html>
+
+<head>
+	<title>SELCOUTH</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<link href='../../static/landingpage/css/style.css' rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../../static/landingpage/css/my-login.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+{% block body %}
+    
+<body>
+		<!--<ul>
+			<li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span><b>Sign In</b></a></li>
+			<li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span><b>Register</b></a></li>
+		</ul>-->
+		
+	  
+	    {% if request.user.is_authenticated %}
+		<nav class="navbar">
+		<div class="container-fluid">
+		<ul class="nav navbar-nav navbar-right">	
+		    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><b><big>{{request.user.username}}</big></b> <span class="caret"></span></a>
+			<ul class="dropdown-menu">
+			<li><a href="account/add_product">Add Products</a></li>
+			<li><a href="{% url 'account:logout'%}">Logout</a></li>
+			<li><a href="/account/profile">Profile</a></li>
+			</ul>
+			</li>
+			</ul>
+		</div>
+		 </nav>
+        {% else %}
+		<nav class="navbar">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav navbar-right">
+			<li><a href="{% url 'account:login'%}"><span class="glyphicon glyphicon-log-in"></span><b>Sign In</b></a></li>
+                <li><a href="{% url 'account:custreg'%}"><span class="glyphicon glyphicon-user"></span><b>Register</b></a></li>
+			</ul>
+		</div>
+		</nav>
+		{% endif %}
+	<section id="main">
+		<center>
+		<div id="image">
+			<img id="logo" src="{% static  'landingpage\img\logo.png'%}"/>
+		</div>
+
+		<div id="search-entry">
+			<form action="index" method="get" name="search_entry"><b>
+                <input type="text" id="search_box" name = 'q' value = "{{request.GET.q}}" placeholder="engine,engine oils..."></b>
+				<center>
+					<button type="submit" class="search_button">Business Search</button>
+					<button type="submit" class="search_button disabled">Rating Search</button>
+				</center>
+			</form>
+		</div>
+		</center>
+	</section>
+
+{% endblock %}
+	<center>
+	<div id="footer">
+		Copyright &copy; 2017 &mdash; Sample Project
+	</div>
+	</center>
+</body>
+
+</html>

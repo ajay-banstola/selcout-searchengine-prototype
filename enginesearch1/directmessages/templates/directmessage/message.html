@@ -1,0 +1,53 @@
+{% extends 'directmessage/base.html' %}
+{% load static %}
+
+{% block body %}
+    {% include 'directmessage/navbar.html' %}
+<div class="row">
+    <div style="padding-top: 6%;">
+        <div class="col-md-5 row-height" >
+            <h1>Your Messages</h1>
+<div>
+   <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>From</th>
+                        <th>message</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for m in messages %}
+                      <tr>
+                        <td><b>{{ m.sender }}</b></td>
+                        <td>{{ m.content }}</td>
+                      <td><button class="btn btn-warning btn-sm"  type="">reply</button></td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+
+   </table>
+
+     </div>
+        </div>
+
+
+
+
+        <div class="col-md-7" style="padding-left: 5%">
+        <form method="POST" action="" enctype="multipart/form-data">
+            <h1>Send Message</h1>
+        {% csrf_token %}
+        <div class="form-group">
+        {{ form_message.as_p }}
+        </div>
+        {{ form.updated_at}}
+        {{ form.updated_at.errors }}
+        <div>
+        <button class="btn btn-warning btn-lg"  type="submit">Send</button>
+        </div>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
